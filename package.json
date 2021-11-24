@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/package",
   "name": "verdaccio-github-oauth-ui",
-  "version": "3.1.2",
+  "version": "3.1.3-pre.1",
   "keywords": [
     "github",
     "login",
@@ -19,7 +19,7 @@
   "author": "Abraham Schilling",
   "main": "dist/server.js",
   "bin": {
-    "verdaccio-github-oauth-ui": "dist/cli.js"
+    "verdaccio-needle-github-oauth-ui": "dist/cli.js"
   },
   "files": [
     "dist"
