@@ -2,10 +2,11 @@ import { stringify } from "querystring"
 
 import { logger } from "../../logger"
 import { User, Verdaccio } from "../verdaccio"
-import { Config, getConfig } from "./Config"
+import { Config, getConfig, getConfigArray } from "./Config"
 
 export class AuthCore {
   private readonly requiredGroup = "github/" + getConfig(this.config, "org")
+  private readonly filterList = getConfigArray(this.config, "filter");
 
   constructor(
     private readonly verdaccio: Verdaccio,
@@ -17,10 +18,14 @@ export class AuthCore {
     groups: string[],
   ): Promise<User> {
     // See https://verdaccio.org/docs/en/packages
+    let filteredGroups = groups.filter(x => x.startsWith(this.requiredGroup));
+    if(this.filterList)
+      filteredGroups = filteredGroups.filter(x => this.filterList.includes(x));
+    console.log(this.filterList, filteredGroups);
     const user: User = {
       name: username,
       groups: ["$all", "@all", "$authenticated", "@authenticated"],
-      real_groups: [username, ...groups.filter(x => x.startsWith(this.requiredGroup))],
+      real_groups: [username, ...filteredGroups],
     }
     logger.log("Created authenticated user", user)
     return user
@@ -43,7 +48,7 @@ export class AuthCore {
   }
 
   authenticate(username: string, groups: string[]): boolean {
-    console.log(username, groups);
+    console.log(username, groups.length, groups);
 
     // no groups - htpasswd user?
     if(groups.length <= 0)

@@ -16,6 +16,9 @@ auth:
     client-id: GITHUB_CLIENT_ID # required
     client-secret: GITHUB_CLIENT_SECRET # required
     # enterprise-origin: GITHUB_ENTERPRISE_ORIGIN # optional, set this if you are using github enterprise
+    filter:
+      - github/needle-tools/repo/project-manipulation
+      - github/needle-tools/repo/project-manipulation-core
   htpasswd:
     file: ./htpasswd
 

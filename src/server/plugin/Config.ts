@@ -14,6 +14,7 @@ export interface PluginConfig {
   "client-id": string
   "client-secret": string
   "enterprise-origin"?: string
+  filter?: string[]
 }
 
 export type PluginConfigKey = keyof PluginConfig
@@ -34,6 +35,11 @@ export function getConfig(config: Config, key: PluginConfigKey): string {
     get(config, `auth[${pluginName}][${key}]`)
 
   return process.env[value] || value
+}
+
+export function getConfigArray(config: Config, key: PluginConfigKey): string[] {
+  const value =  null || get(config, `auth[${pluginName}][${key}]`);
+  return process.env[value] || value;
 }
 
 /**
