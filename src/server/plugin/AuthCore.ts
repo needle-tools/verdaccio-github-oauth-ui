@@ -20,7 +20,7 @@ export class AuthCore {
     const user: User = {
       name: username,
       groups: ["$all", "@all", "$authenticated", "@authenticated"],
-      real_groups: [username, ...groups],
+      real_groups: [username, ...groups.filter(x => x.startsWith(this.requiredGroup))],
     }
     logger.log("Created authenticated user", user)
     return user
@@ -43,7 +43,13 @@ export class AuthCore {
   }
 
   authenticate(username: string, groups: string[]): boolean {
-    /*
+    console.log(username, groups);
+
+    // no groups - htpasswd user?
+    if(groups.length <= 0)
+      return false;
+    
+      /*
     if (!groups.includes(this.requiredGroup)) {
       logger.error(
         `Access denied: User "${username}" is not a member of  "${this.requiredGroup}"`,
