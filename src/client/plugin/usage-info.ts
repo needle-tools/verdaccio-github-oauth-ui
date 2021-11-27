@@ -3,7 +3,7 @@
 // to be configured.
 //
 
-export function getUsageInfo() {
+export function getUsageInfo() { 
   const username = localStorage.getItem("username")
   if (!username) {
     return "Click the login button to authenticate with GitHub."

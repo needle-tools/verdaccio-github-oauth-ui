@@ -19,6 +19,10 @@ auth:
   htpasswd:
     file: ./htpasswd
 
+theme:
+  needle:
+    option1: true
+
 security:
   api:
     jwt:

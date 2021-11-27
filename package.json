@@ -54,7 +54,8 @@
     "minimist": "^1.2.0",
     "octokit": "^1.7.0",
     "open": "^8.0.7",
-    "query-string": "^7.0.0"
+    "query-string": "^7.0.0",
+    "verdaccio-theme-needle": "^3.2.5-pre.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",

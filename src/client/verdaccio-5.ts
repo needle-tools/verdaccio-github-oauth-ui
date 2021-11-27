@@ -56,7 +56,7 @@ function modifyUsageInfoNodes(
       })
   }
 
-  infoElements.forEach((node) => {
+  infoElements.forEach((node) => { 
     if (
       // We only match lines related to bundler commands
       !!node.innerText.match(/^(npm|pnpm|yarn)/) &&
