@@ -59,10 +59,11 @@ function modifyUsageInfoNodes(
   infoElements.forEach((node) => { 
     if (
       // We only match lines related to bundler commands
-      !!node.innerText.match(/^(npm|pnpm|yarn)/) &&
+      !!node.innerText.match(/^(npm|pnpm|yarn|Unity)/) &&
       // And only commands that we want to remove
       (node.innerText.includes("adduser") ||
-        node.innerText.includes("set password"))
+        node.innerText.includes("set password") ||
+        node.innerText.includes("Copy "))
     ) {
       node.parentElement!.parentElement!.removeChild(node.parentElement!)
     }
@@ -75,7 +76,7 @@ function updateUsageInfo() {
   )
   modifyUsageInfoNodes(
     dialogUsageInfoSelector,
-    (node) =>
+    (node) => true ||
       !!node.innerText.match(
         // This checks for an element showing instructions to set the registry URL
         /((npm|pnpm) set|(yarn) config set)/,
